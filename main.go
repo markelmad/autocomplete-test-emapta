@@ -60,6 +60,8 @@ func showResult(w http.ResponseWriter, r *http.Request) {
 			fmt.Printf("Results are: %v\n", res.Title)
 			w.Write([]byte(res.Title + "\n"))
 		}
+	} else {
+		w.Write([]byte("No results found based on your query: " + frag))
 	}
 
 }

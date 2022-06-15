@@ -1,15 +1,17 @@
-# Autocomplete Test
+# Autocomplete Web Service using GoLang
 
-This is a simple test of an Autocomplete web service for Emapta-Zesty.io. The purpose is to return a list of Shakespeare's works based on the fragment that the user will provide or input. In this case, we will be using a quary to simulate user's input. Shakespeare's works' list will be extracted from a JSON file. Each item on the JSON file contains only 2 itemms.
+This is a simple test of an Autocomplete web service for Emapta-Zesty.io. The purpose is to return a list of Shakespeare's works based on the fragment that the user will provide or input. In this case, we will be using a query to simulate user's input. Shakespeare's works' list will be extracted from a JSON file. Each item on the JSON file contains only 2 itemms.
 
 ```JSON
 {
     "Title": "Title of the work",
-    "ReadCount": "How frequent this was accessed"
+    "ReadCount": 0
 }
 ```
 
-The result is based on how frequent the user have access an item which is the `ReadCount`. If more than 1 item have equal frequency, the service will then lookup for the closes Title from the fragment provided. If still more than 1 item are equal, result will now be based alphabetically.
+The result is based on how frequent the user has accessed an item which is the `ReadCount`. If more than 1 item have equal frequency, the service will then lookup for the closest `Title` from the fragment provided. If still more than 1 item are equal, result will now be based alphabetically.
+
+Feel free to edit the JSON file. Update each `ReadCount` values to your likings.
 
 ## Installation:
 
@@ -40,7 +42,7 @@ The result is based on how frequent the user have access an item which is the `R
 
 ## Other ways to access the web service
 
-### Using cURL
+### Using cURL:
 
 1. Make sure the server is running.
 2. Type in `curl http://localhost:9000/autocomplete?term=th` in a terminal window and hit Enter.
@@ -50,7 +52,6 @@ The result is based on how frequent the user have access an item which is the `R
 These are the results based on the test run that I did on my end:
 
 ### Fragment: "th"
-
     Twelfth Night
     Two Gentlemen of Verona
     Taming of the Shrew
@@ -60,11 +61,9 @@ These are the results based on the test run that I did on my end:
     Troilus and Cressida
 
 ### Fragment: "fr"
-
     Troilus and Cressida
 
 ### Fragment: "pi"
-
     King John
     King Lear
     Midsummer Night's Dream
@@ -76,28 +75,23 @@ These are the results based on the test run that I did on my end:
     Winter's Tale
 
 ### Fragment: "sh"
-
     None
 
 ### Fragment: "wu"
-
     Julius Caesar
     Much Ado about Nothing
     Winter's Tale
 
 ### Fragment: "ar"
-
     All's Well That Ends Well
     Antony and Cleopatra
     As You Like It
     Troilus and Cressida
 
 ### Fragment: "il"
-
     All's Well That Ends Well
 
 ### Fragment: "ne"
-
     Henry IV, Part I
     Henry IV, Part II
     Henry V
@@ -112,7 +106,6 @@ These are the results based on the test run that I did on my end:
     Tempest
 
 ### Fragment: "se"
-
     Henry IV, Part I
     Henry IV, Part II
     Henry V
@@ -125,7 +118,6 @@ These are the results based on the test run that I did on my end:
     Merry Wives of Windsor
     Pericles
     Tempest
-
 ### Fragment: "pl"
 
     All's Well That Ends Well
