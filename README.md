@@ -11,7 +11,7 @@ This is a simple test of an Autocomplete web service for Emapta-Zesty.io. The pu
 
 The result is based on how frequent the user has accessed an item which is the `ReadCount`. If more than 1 item have equal frequency, the service will then lookup for the closest `Title` from the fragment provided. If still more than 1 item are equal, result will now be based alphabetically. Moreover, result is limited to 25 results only. This limit can be adjusted by modifying the constant value of the `resultLimit` inside main.go file.
 
-Feel free to edit the JSON file. Update each `ReadCount` values to your likings.
+Feel free to edit the JSON file. Update each `ReadCount` values to your likings. I already updated a couple of `ReadCount` values for `Twelfth Night (4)` and `Two Gentlemen of Verona(3)` so results will more likely to show these two `Titles`. The rest are valued `0`.
 
 You can also update the threshold for determining the amount of levenshtein distance by modifying the multiplier value of `thresholdMultiplier` inside main.go.
 
