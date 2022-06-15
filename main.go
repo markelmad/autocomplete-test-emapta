@@ -12,25 +12,39 @@ import (
 )
 
 const resultLimit int = 25 //the limit that we should print out
+// multiplier for the threshold that will determine the amount of levenshtein distance that will be accepted.
+// 0.5 is the default, meaning, the distance should be less than or equal to the half of the length of the fragment (rounded of)
+// Higher means it will be stricter. Lower will accept more results but less accurate.
+const thresholdMultiplier float32 = 0.5
 
 var works []helper.ShakespeareWork
 
 func showResult(w http.ResponseWriter, r *http.Request) {
 	//extract only the fragment from URL query
+	if !r.URL.Query().Has("term") {
+		w.Write([]byte("No query received."))
+		return
+	}
 	frag := r.URL.Query()["term"][0]
-	// fmt.Printf("The fragment is: %v\n", frag)
+
+	fmt.Printf("The fragment is: %v\n", frag)
 
 	results := []helper.ResultsFromLebenshtein{}
-	threshold := len(frag) / 2
 
 	for _, work := range works {
 
-		regFrag, err := regexp.Compile("[^a-zA-Z]+")
+		regFrag, err := regexp.Compile("[^a-zA-Z ]+")
 		if err != nil {
 			log.Fatal(err)
 		}
 		//remove all non-letters from the fragment
 		parsedFrag := strings.ToLower(regFrag.ReplaceAllLiteralString(frag, ""))
+		threshold := int(float32(len(parsedFrag)) * 0.5)
+
+		if len(parsedFrag) == 0 {
+			w.Write([]byte("No query received."))
+			return
+		}
 
 		//get the distance of the fragment versus each title based on Levenshtein Distance algorithm
 		var dist int
