@@ -11,48 +11,61 @@ import (
 	"strings"
 )
 
+const resultLimit int = 25 //the limit that we should print out
+
 var works []helper.ShakespeareWork
 
 func showResult(w http.ResponseWriter, r *http.Request) {
+	//extract only the fragment from URL query
 	frag := r.URL.Query()["term"][0]
-	fmt.Printf("The fragment is: %v\n", frag)
+	// fmt.Printf("The fragment is: %v\n", frag)
 
-	// dist := helper.Distance(frag[0], "shakespeare")
-	// fmt.Printf("Distance is %d", dist)
 	results := []helper.ResultsFromLebenshtein{}
 	threshold := len(frag) / 2
 
 	for _, work := range works {
 
-		strippedTitle, err := regexp.Compile("[^a-zA-Z ]+")
+		regFrag, err := regexp.Compile("[^a-zA-Z]+")
 		if err != nil {
 			log.Fatal(err)
 		}
-		newTitle := strings.ToLower(strippedTitle.ReplaceAllLiteralString(work.Title, ""))
+		//remove all non-letters from the fragment
+		parsedFrag := strings.ToLower(regFrag.ReplaceAllLiteralString(frag, ""))
 
+		//get the distance of the fragment versus each title based on Levenshtein Distance algorithm
 		var dist int
-		if len(newTitle) < len(frag) {
-			dist = helper.LevenshteinDistance(newTitle, frag)
+		//making sure there's no out of bounds error when the title is shorter than the fragment
+		if len(work.Title) < len(parsedFrag) {
+			dist = helper.LevenshteinDistance(strings.ToLower(work.Title), parsedFrag)
 		} else {
-			dist = helper.LevenshteinDistance(newTitle[:len(frag)], frag)
+			dist = helper.LevenshteinDistance(strings.ToLower(work.Title)[:len(parsedFrag)], parsedFrag)
 		}
 
+		// fmt.Printf("Title: %v -- Frag: %v -- Distance: %v\n", strings.ToLower(work.Title), parsedFrag, dist)
+		//this is where we filter. put each title with a distance lower than the threshold to the results splice.
 		if dist <= threshold {
 			results = append(results, helper.Copy(work, dist))
 		}
-
+		//sort the results splice based on the ReadCount (frequency) then the distance, and lastly alphabetically which will deemed necessary.
 		helper.Sort(results)
 	}
-
-	for _, res := range results {
-		fmt.Printf("Results are: %v\n", res.Title)
-		w.Write([]byte(res.Title + "\n"))
+	//making sure we all process when the results is not empty
+	if len(results) > 0 {
+		//making sure we only show results not more than the resultLimit
+		if len(results) > resultLimit {
+			results = results[:resultLimit]
+		}
+		//printing out each results
+		for _, res := range results {
+			fmt.Printf("Results are: %v\n", res.Title)
+			w.Write([]byte(res.Title + "\n"))
+		}
 	}
 
 }
 
 func main() {
-
+	//loading the local text file (JSON) that contains all the necessary data to process
 	content, err := ioutil.ReadFile("shakespeare_works.json")
 	if err != nil {
 		log.Fatal(err)
