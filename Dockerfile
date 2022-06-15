@@ -1,14 +1,19 @@
 FROM golang:latest
 
 RUN mkdir /autocomplete-test
-WORKDIR /autocomplete-test
-
-RUN export GO118MODULE=on 
-RUN go get github.com/markelmad/autocomplete-test-emapta
+ADD . /autocomplete-test
 RUN cd /autocomplete-test && git clone https://github.com/markelmad/autocomplete-test-emapta.git
+WORKDIR /autocomplete-test
+RUN go build -o main .
+CMD ["/autocomplete-test/main"]
+# WORKDIR /autocomplete-test
 
-RUN cd /autocomplete-test && go build
+# RUN export GO118MODULE=on 
+# ADD . /autocomplete-test
+# RUN cd /autocomplete-test && git clone https://github.com/markelmad/autocomplete-test-emapta.git
 
-EXPOSE 9000
+# RUN cd /autocomplete-test && go build
 
-ENTRYPOINT ["/autocomplete-test/main"]
+# EXPOSE 9000
+
+# ENTRYPOINT ["/autocomplete-test/autocomplete-test-emapta"]
