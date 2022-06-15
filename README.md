@@ -4,8 +4,8 @@ This is a simple test of an Autocomplete web service for Emapta-Zesty.io. The pu
 
 ```JSON
 {
-    Title: "Title of the work"\
-    ReadCount: "How frequent this was accessed"
+    "Title": "Title of the work",
+    "ReadCount": "How frequent this was accessed"
 }
 ```
 
