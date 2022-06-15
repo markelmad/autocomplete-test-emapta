@@ -2,7 +2,7 @@
 
 This is a simple test of an Autocomplete web service for Emapta-Zesty.io. The purpose is to return a list of Shakespeare's works based on the fragment that the user will provide or input. In this case, we will be using a quary to simulate user's input. Shakespeare's works' list will be extracted from a JSON file. Each item on the JSON file contains only 2 itemms.
 
-`{ Title: "Title of the work" ReadCount: "How frequent this was accessed" }`
+`{ Title: "Title of the work"\nReadCount: "How frequent this was accessed" }`
 
 The result is based on how frequent the user have access an item which is the `ReadCount`. If more than 1 item have equal frequency, the service will then lookup for the closes Title from the fragment provided. If still more than 1 item are equal, result will now be based alphabetically.
 
