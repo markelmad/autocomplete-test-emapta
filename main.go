@@ -12,10 +12,11 @@ import (
 )
 
 const resultLimit int = 25 //the limit that we should print out
-// multiplier for the threshold that will determine the amount of levenshtein distance that will be accepted.
-// 0.5 is the default, meaning, the distance should be less than or equal to the half of the length of the fragment (rounded of)
-// Higher means it will be stricter. Lower will accept more results but less accurate.
-const thresholdMultiplier float32 = 0.5
+// Value accepts 0 to 1 only.
+// This is a multiplier for the threshold that will determine the amount of levenshtein distance that will be accepted.
+// 0.75 is the default, meaning, the distance should be less than or equal to the half of the length of the fragment (floor)
+// Lower value means it will be stricter. Higher will accept more results but less accurate.
+const thresholdMultiplier float32 = 0.75
 
 var works []helper.ShakespeareWork
 
@@ -39,7 +40,7 @@ func showResult(w http.ResponseWriter, r *http.Request) {
 		}
 		//remove all non-letters from the fragment
 		parsedFrag := strings.ToLower(regFrag.ReplaceAllLiteralString(frag, ""))
-		threshold := int(float32(len(parsedFrag)) * 0.5)
+		threshold := int(float32(len(parsedFrag)) * thresholdMultiplier)
 
 		if len(parsedFrag) == 0 {
 			w.Write([]byte("No query received."))
