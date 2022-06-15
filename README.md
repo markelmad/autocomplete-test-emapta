@@ -77,54 +77,54 @@ These are the results based on the test run that I did on my end:
 
 ### Fragment: "sh"
 
-None
+    None
 
 ### Fragment: "wu"
 
-Julius Caesar
-Much Ado about Nothing
-Winter's Tale
+    Julius Caesar
+    Much Ado about Nothing
+    Winter's Tale
 
 ### Fragment: "ar"
 
-All's Well That Ends Well
-Antony and Cleopatra
-As You Like It
-Troilus and Cressida
+    All's Well That Ends Well
+    Antony and Cleopatra
+    As You Like It
+    Troilus and Cressida
 
 ### Fragment: "il"
 
-All's Well That Ends Well
+    All's Well That Ends Well
 
 ### Fragment: "ne"
 
-Henry IV, Part I
-Henry IV, Part II
-Henry V
-Henry VI, Part I
-Henry VI, Part II
-Henry VI, Part III
-Henry VIII
-Measure for Measure
-Merchant of Venice
-Merry Wives of Windsor
-Pericles
-Tempest
+    Henry IV, Part I
+    Henry IV, Part II
+    Henry V
+    Henry VI, Part I
+    Henry VI, Part II
+    Henry VI, Part III
+    Henry VIII
+    Measure for Measure
+    Merchant of Venice
+    Merry Wives of Windsor
+    Pericles
+    Tempest
 
 ### Fragment: "se"
 
-Henry IV, Part I
-Henry IV, Part II
-Henry V
-Henry VI, Part I
-Henry VI, Part II
-Henry VI, Part III
-Henry VIII
-Measure for Measure
-Merchant of Venice
-Merry Wives of Windsor
-Pericles
-Tempest
+    Henry IV, Part I
+    Henry IV, Part II
+    Henry V
+    Henry VI, Part I
+    Henry VI, Part II
+    Henry VI, Part III
+    Henry VIII
+    Measure for Measure
+    Merchant of Venice
+    Merry Wives of Windsor
+    Pericles
+    Tempest
 
 ### Fragment: "pl"
 
